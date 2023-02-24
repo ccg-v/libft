@@ -69,23 +69,23 @@ OBJ_BONUS_FILES = $(BONUS_FILES:.c=.o)
 
 
 $(NAME): $(HEADER) $(OBJ_FILES) 
-	ar -rcs $(NAME) $(OBJ_FILES)
+	@ar -rcs $(NAME) $(OBJ_FILES)
 
-all: $(NAME)
+all: @$(NAME)
 
 bonus: $(HEADER) $(OBJ_BONUS_FILES)
-	ar -rcs $(NAME) $(OBJ_BONUS_FILES)
-	touch bonus
+	@ar -rcs $(NAME) $(OBJ_BONUS_FILES)
+	@touch bonus
 
 %.o: %.c
-	$(CC) -c $(CFLAGS) $< -o $@
+	@$(CC) -c $(CFLAGS) $< -o $@
 
 clean:
 	@rm -f $(OBJ_FILES) $(OBJ_BONUS_FILES)
 
 fclean: clean
-	rm -f $(NAME)
-	rm -f bonus
+	@rm -f $(NAME)
+	@rm -f bonus
 	
 re: fclean all
 
