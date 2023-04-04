@@ -64,30 +64,35 @@ BONUS_FILES = ft_lstnew_bonus.c \
 			  ft_lstmap_bonus.c \
 			  $(SRC_FILES)
 
+DEPS = $(SRC_FILES:.c=.d)
+DEPS += $(BONUS_FILES:.c=.d)
+
 OBJ_FILES = $(SRC_FILES:.c=.o)
 OBJ_BONUS_FILES = $(BONUS_FILES:.c=.o)
 
 
 $(NAME): $(HEADER) $(OBJ_FILES) 
-	@ar -rcs $(NAME) $(OBJ_FILES)
-
+	ar -rcs $(NAME) $(OBJ_FILES)
+	@echo "Library compiled"
+	
 all: @$(NAME)
 
 bonus: $(HEADER) $(OBJ_BONUS_FILES)
-	@ar -rcs $(NAME) $(OBJ_BONUS_FILES)
-	@touch bonus
+	ar -rcs $(NAME) $(OBJ_BONUS_FILES)
+	touch bonus
 
 %.o: %.c
 	@$(CC) -c $(CFLAGS) $< -o $@
 
 clean:
-	@rm -f $(OBJ_FILES) $(OBJ_BONUS_FILES)
+	rm -f $(OBJ_FILES) $(OBJ_BONUS_FILES)
 
 fclean: clean
-	@rm -f $(NAME)
-	@rm -f bonus
+	rm -f $(NAME)
+	rm -f bonus
 	
 re: fclean all
 
 .PHONY: all, bonus, clean, fclean, re
 
+-include $(DEPS)
