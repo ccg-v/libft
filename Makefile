@@ -6,7 +6,7 @@
 #    By: ccarrace <ccarrace@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/16 19:55:46 by ccarrace          #+#    #+#              #
-#    Updated: 2022/07/04 19:28:51 by ccarrace         ###   ########.fr        #
+#    Updated: 2023/04/03 19:48:09 by ccarrace         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libft.a
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -MMD -Wall -Wextra -Werror
 
 HEADER = libft.h
 
@@ -66,28 +66,27 @@ BONUS_FILES = ft_lstnew_bonus.c \
 
 DEPS = $(SRC_FILES:.c=.d)
 DEPS += $(BONUS_FILES:.c=.d)
-
 OBJ_FILES = $(SRC_FILES:.c=.o)
 OBJ_BONUS_FILES = $(BONUS_FILES:.c=.o)
 
-
 $(NAME): $(HEADER) $(OBJ_FILES) 
 	ar -rcs $(NAME) $(OBJ_FILES)
-	@echo "Library compiled"
-	
-all: @$(NAME)
+	@echo "Library libft compiled"
+
+all: $(NAME)
 
 bonus: $(HEADER) $(OBJ_BONUS_FILES)
 	ar -rcs $(NAME) $(OBJ_BONUS_FILES)
 	touch bonus
 
 %.o: %.c
-	@$(CC) -c $(CFLAGS) $< -o $@
+	$(CC) -c $(CFLAGS) $< -o $@
 
 clean:
-	rm -f $(OBJ_FILES) $(OBJ_BONUS_FILES)
+	rm -f $(OBJ_FILES) $(OBJ_BONUS_FILES) $(DEPS)
 
-fclean: clean
+fclean: 
+	@rm -f $(OBJ_FILES) $(OBJ_BONUS_FILES) $(DEPS)
 	rm -f $(NAME)
 	rm -f bonus
 	
@@ -95,4 +94,4 @@ re: fclean all
 
 .PHONY: all, bonus, clean, fclean, re
 
--include $(DEPS)
+-include $(DEPS)	
