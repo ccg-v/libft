@@ -6,7 +6,7 @@
 #    By: ccarrace <ccarrace@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/16 19:55:46 by ccarrace          #+#    #+#              #
-#    Updated: 2023/04/03 19:48:09 by ccarrace         ###   ########.fr        #
+#    Updated: 2023/04/08 21:37:26 by ccarrace         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,7 @@ OBJ_BONUS_FILES = $(BONUS_FILES:.c=.o)
 
 $(NAME): $(HEADER) $(OBJ_FILES) 
 	ar -rcs $(NAME) $(OBJ_FILES)
-	@echo "Library libft compiled"
+	@$(MSG_OK_LIBFT)
 
 all: $(NAME)
 
@@ -82,16 +82,28 @@ bonus: $(HEADER) $(OBJ_BONUS_FILES)
 %.o: %.c
 	$(CC) -c $(CFLAGS) $< -o $@
 
+-include $(DEPS)
+
 clean:
 	rm -f $(OBJ_FILES) $(OBJ_BONUS_FILES) $(DEPS)
 
-fclean: 
+fclean:	#clean 
 	@rm -f $(OBJ_FILES) $(OBJ_BONUS_FILES) $(DEPS)
 	rm -f $(NAME)
 	rm -f bonus
-	
+	@$(MSG_OK_FCLEAN)
+
 re: fclean all
 
-.PHONY: all, bonus, clean, fclean, re
+# --- Colors ---------------------------------------------------------------- #
 
--include $(DEPS)	
+YELLOW		= \033[0;93m
+BOLD_YELLOW	= \033[1;33m
+DEF_COLOR	= \033[0m
+
+# --- Messages -------------------------------------------------------------- #
+
+MSG_OK_LIBFT	=	echo "$(BOLD_YELLOW)Library 'libft' created$(DEF_COLOR)"
+MSG_OK_FCLEAN	=	echo "$(BOLD_YELLOW)Library 'libft' removed$(DEF_COLOR)"	
+
+.PHONY: all, bonus, clean, fclean, re
