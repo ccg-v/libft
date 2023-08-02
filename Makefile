@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ccarrace <ccarrace@student.42barcel>       +#+  +:+       +#+         #
+#    By: ccarrace <ccarrace@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/16 19:55:46 by ccarrace          #+#    #+#              #
-#    Updated: 2023/04/08 21:37:26 by ccarrace         ###   ########.fr        #
+#    Updated: 2023/07/29 01:38:46 by ccarrace         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,8 @@ SRC_FILES = ft_isalpha.c \
 	  		ft_putchar_fd.c \
 	  		ft_putstr_fd.c \
 	  		ft_putendl_fd.c \
-	  		ft_putnbr_fd.c 
+	  		ft_putnbr_fd.c \
+			get_next_line.c
 
 BONUS_FILES = ft_lstnew_bonus.c \
 			  ft_lstadd_front_bonus.c \
